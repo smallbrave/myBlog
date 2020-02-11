@@ -4,9 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MyBlog</title>
+    <title>Vue表格</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    
+    <div id="app" >
+            <input type="text" placeholder="ID" v-model="id" >
+            <input type="text" placeholder="name" v-model="name"/>
+            <input type="text" placeholder="gender" v-model="gender"/>
+            <button @click = "add">添加</button>
+        <table border="1px solid #ccc" cellspacing="0" align="center">
+            <caption>Vue 表格</caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>name</th>
+                    <th>Gender</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for = "(item,index) in items" :key = "index">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>                    
+                    <td>{{ item.gender }}</td>
+                    <td>
+                        <button @click="remove(index)">删除</button>
+                    </td>                                          
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                items:[
+                    {
+                        id: 01,
+                        name: "kangkang",
+                        gender: "male"
+                    },
+                    {
+                        id: 02,
+                        name: "smallbrave",
+                        gender: "female"
+                    },
+                ],
+                id: '',
+                name: '',
+                gender: ''
+            },
+            methods: {
+                add:function(){
+                    var item = {
+                        'id': this.id,
+                        'name': this.name,
+                        'gender': this.gender                                                 
+                    }
+                   this.items.push(item);
+                },
+                remove: function(index){
+                      this.items.splice(index,1);
+                }
+            },
+        })
+
+    </script>
 </body>
 </html>
