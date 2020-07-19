@@ -1,22 +1,31 @@
 <template>
   <div id="app">
-    <Button type="primary" disabled @click="confirm">
-      提交
-    </Button>
+    <MyButton type="primary" disabled @click="confirm">提交</MyButton>
+    <MyInput type="text" v-model="value" disabled @input="handleInput"></MyInput>
   </div>
 </template>
 
 <script>
-import Button from '@/myComponents/Button.vue';
+import MyButton from '@/myComponents/MyButton.vue';
+import MyInput from '@/myComponents/MyInput.vue';
 
 export default {
   name: 'App',
   components: {
-    Button,
+    MyButton,
+    MyInput,
+  },
+  data() {
+    return {
+      value: '',
+    };
   },
   methods: {
     confirm() {
       console.log('提交');
+    },
+    handleInput(val) {
+      console.log(val);
     },
   },
 };
